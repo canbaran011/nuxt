@@ -2,19 +2,15 @@
     <div>
         <section class="post-list">
         <PostPreview
-          id="1"
+          v-for="post in posts"
+          :key="post.id"
+          :id="post.id"
           :is-admin="isAdmin"
-          thumbnail="http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg"
-          title="Hello Nature"
-          previewText="This is the real nature sorrow"
+          :thumbnail="post.thumbnail"
+          :title="post.title"
+          :previewText="post.previewText"
         />
-        <PostPreview
-          id="1"
-          :is-admin="isAdmin"
-          thumbnail="http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg"
-          title="Hello Nature Two"
-          previewText="This is  2 the real nature sorrow"
-        />
+
       </section>
     </div>
 </template>
@@ -29,6 +25,10 @@ export default {
     isAdmin : {
       type : Boolean,
       default : false
+    },
+    posts:{
+      type :Array,
+      required :true
     }
   }
 };
