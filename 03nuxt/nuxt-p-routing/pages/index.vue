@@ -4,50 +4,47 @@
       <h1>GET THE LATEST TECH NEWS</h1>
     </section>
 
-     <PostList :posts="loadedPosts" />
-  
+    <PostList :posts="loadedPosts" />
   </div>
 </template>
 
 <script>
-import PostList from '@/components/Posts/PostList.vue'
+import PostList from "@/components/Posts/PostList.vue";
 
 export default {
-components :{
-  PostList
-},
-asyncData() {
-  return{
-    
-  }
-},
-data(){
-    return{
-      loadedPosts:[
- 
-      ]
-    }
-},
-created() {
-  setTimeout(() => {
-    this.loadedPosts = [
-             {
-        id: '1',
-        title: "First Post",
-        previewText: "this is preview text",
-        thumbnail: "http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg"
-      },
-      {
-        id: '2',
-        title: "Second Post",
-        previewText: "this is preview second text",
-        thumbnail: "http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg"
-        
-      }
-      
-    ]
-  }, 1500);
-},
+  components: {
+    PostList
+  },
+  asyncData(context, callback) {
+    console.log(context);
+
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {
+            id: "1",
+            title: "First Post",
+            previewText: "this is preview text",
+            thumbnail:
+              "http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg"
+          },
+          {
+            id: "2",
+            title: "Second Post",
+            previewText: "this is preview second text",
+            thumbnail:
+              "http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg"
+          }
+        ]
+      });
+    }, 2000);
+  },
+  // data() {
+  //   return {
+  //     loadedPosts: []
+  //   };
+  // },
+  created() {}
 };
 </script>
 
@@ -91,5 +88,6 @@ created() {
   align-items: center;
   justify-content: center;
 }
-
 </style>
+//
+http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg
