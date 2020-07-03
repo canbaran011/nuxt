@@ -1,9 +1,9 @@
 <template>
     <div class="single-post-page">
         <section class="post">
-            <h1 class="post-title">Title of Post</h1>
+            <h1 class="post-title">{{ loadedPosts.title }}</h1>
             <div class="post-details">
-                <div class="post-detail">Last Updated on</div>
+                <div class="post-detail">{{}}</div>
                 <div class="post-detail">Written by X</div>
             </div>
             <p class="post-content">COntent of the post</p>
@@ -13,7 +13,26 @@
         </section>
     </div>
 </template>
-
+<script>
+export default {
+  asyncData(context, callback){
+      setTimeout(() => {
+        callback(null,{
+          loadedPosts  : {
+            id: "1",
+            title: "First Post",
+            previewText: "this is preview text",
+            author:"CBG",
+            updatedDate: new Date(),
+            content:" some content text is about"
+            thumbnail:
+              "http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg"
+          }
+        })
+      }, 1000);
+  }
+}
+</script>
 <style scoped>
     .single-post-page {
   padding: 30px;
