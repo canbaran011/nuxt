@@ -1,40 +1,46 @@
 <template>
-    <div class="single-post-page">
-        <section class="post">
-            <h1 class="post-title">{{ loadedPosts.title }}</h1>
-            <div class="post-details">
-                <div class="post-detail">{{}}</div>
-                <div class="post-detail">Written by X</div>
-            </div>
-            <p class="post-content">COntent of the post</p>
-        </section>
-        <section class="post-feedback">
-            <p>Let me know what you think <a href="mailto:canbaran011@gmail.com">ME</a> </p>
-        </section>
-    </div>
+  <div class="single-post-page">
+    <section class="post">
+      <h1 class="post-title">{{ loadedPost.title }}</h1>
+      <div class="post-details">
+        <div class="post-detail">last updated {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">Written by {{ loadedPost.author }}</div>
+      </div>
+      <p class="post-content">{{ loadedPost.content }}</p>
+    </section>
+    <section class="post-feedback">
+      <p>
+        Let me know what you think <a href="mailto:canbaran011@gmail.com">ME</a>
+      </p>
+    </section>
+  </div>
 </template>
 <script>
 export default {
-  asyncData(context, callback){
+  asyncData(context, callback) {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        callback(null,{
-          loadedPosts  : {
+        callback(null, {
+          loadedPost: {
             id: "1",
-            title: "First Post",
+            title: "First Post (ID: " + context.route.params.id + ")",
             previewText: "this is preview text",
-            author:"CBG",
+            author: "CBG",
             updatedDate: new Date(),
-            content:" some content text is about"
+            content: " some content text is about",
             thumbnail:
               "http://omargardens.com/blog/wp-content/uploads/2017/06/spring-in-nature-wide-wallpaper-603794.jpg"
           }
-        })
+        });
       }, 1000);
+    }).catch(e => {
+      context.error(new Error());
+    });
   }
-}
+};
 </script>
 <style scoped>
-    .single-post-page {
+.single-post-page {
   padding: 30px;
   text-align: center;
   box-sizing: border-box;
